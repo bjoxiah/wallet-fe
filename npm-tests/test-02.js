@@ -9,7 +9,12 @@ import https from "https";
 
 https.get('https://coderbyte.com/api/challenges/json/rest-get-simple', (resp) => {
     let data = "";
-    
+    resp.setEncoding('utf8')
     // parse json and print "hobbies" property as ITEM1, ITEM2,...
-    console.log();
+    resp.setEncoding('utf8')  
+    resp.on('data', (res) =>  {
+        data = JSON.parse(res);
+        console.log(data['hobbies'].join(','))
+    })  
+    resp.on('error', console.error) 
 })

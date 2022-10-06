@@ -24,8 +24,8 @@ app.post('/save',(request,reply)=>{
     const body = request.body;
 
     // purify the inputs here
-    userInput.firstname = body.firstname;
-    userInput.lastname = body.lastname;
+    userInput.firstname = body.firstname.trim().replace(/<(.|\n)*?>/g, '');
+    userInput.lastname = body.lastname.trim().replace(/<(.|\n)*?>/g, '');
 
 
     reply.status(200);

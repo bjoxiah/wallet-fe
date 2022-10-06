@@ -7,11 +7,30 @@
  */
 
 import fs from "fs-extra";
-import {fastify } from "fastify";
+import { fastify } from "fastify";
 
 const data = { error : false, users : ["John Doe","Lucita Esau", "Thomas Friedman", "Norma Helms", "Amy Manning"]  };
 
 // write the json saving code here
+const writeFile = async () => {
+    try {
+      await fs.writeJson('./data.json', data);
+    } catch (err) {
+      console.error(err)
+      return;
+    }
+}
+await writeFile();
+
+const readFile = async () => {
+    try {
+      const { users } = await fs.readJson('./data.json')
+      return users;
+    } catch (err) {
+      console.error(err)
+      return;
+    }
+}
 
 
 const app = fastify({
@@ -19,11 +38,16 @@ const app = fastify({
     keepAliveTimeout : 65 * 1000
 });
 
-app.get('/',(request,reply)=>{
+app.get('/', async (request,reply)=>{
     
 
     reply.header('Content-Type', 'text/html; charset=utf-8');
     // read the json here and insert the list names into the html
+
+        const users = await readFile();
+        const userList = users.map((name) => {
+                return `<p>${name}</p>`;
+            })
 
         const page = 
         `<html>
@@ -31,7 +55,9 @@ app.get('/',(request,reply)=>{
                 <title>Wallethub Test</title>
             </head>
             <body>
-            <p>..print the list here..</p>
+            ${
+                userList.join(' ')
+            }
             </body>
         </html>`;
         
