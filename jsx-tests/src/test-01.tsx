@@ -7,9 +7,18 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-function DataList(props) {
+function DataList({ data }) {
   return (
-    <h2>code goes here</h2>
+    <>
+      <h2>code goes here</h2>
+      <ul>
+        {
+          data.map((item, index) => {
+            return <li key={index}><span>{item.name}</span> <span>{item.age}</span></li>
+          })
+        }
+      </ul>
+    </>
   );
 }
 

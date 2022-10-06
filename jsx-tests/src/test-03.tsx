@@ -41,12 +41,22 @@ const style = {
             border: 'none',
             backgroundColor: 'lightseagreen',
             fontSize: '14px',
-            borderRadius: '5px'
+            borderRadius: '5px',
+            cursor: 'pointer'
         }
     }
 } as const;
 
+interface IPhoneBook {
+    firstName: string,
+    lastName: string,
+    phone: string,
+} 
 function PhoneBookForm({ addEntryToPhoneBook }) {
+    const [userFirstName, setUserFirstName] = useState("Coder");
+    const [userLastName, setUserLastName] = useState("Byte");
+    const [userPhone, setUserPhone] = useState("8885559999");
+
     return (
         <form onSubmit={e => { e.preventDefault() }} style={style.form.container}>
             <label>First name:</label>
@@ -56,6 +66,8 @@ function PhoneBookForm({ addEntryToPhoneBook }) {
                 className='userFirstname'
                 name='userFirstname'
                 type='text'
+                value={userFirstName}
+                onChange={(ev) => setUserFirstName(ev.target.value)}
             />
             <br />
             <label>Last name:</label>
@@ -65,6 +77,8 @@ function PhoneBookForm({ addEntryToPhoneBook }) {
                 className='userLastname'
                 name='userLastname'
                 type='text'
+                value={userLastName}
+                onChange={(ev) => setUserLastName(ev.target.value)}
             />
             <br />
             <label>Phone:</label>
@@ -74,6 +88,8 @@ function PhoneBookForm({ addEntryToPhoneBook }) {
                 className='userPhone'
                 name='userPhone'
                 type='text'
+                value={userPhone}
+                onChange={(ev) => setUserPhone(ev.target.value)}
             />
             <br />
             <input
@@ -81,12 +97,18 @@ function PhoneBookForm({ addEntryToPhoneBook }) {
                 className='submitButton'
                 type='submit'
                 value='Add User'
+                onClick={() => addEntryToPhoneBook({firstName: userFirstName, lastName: userLastName, phone: userPhone}) }
             />
         </form>
     )
 }
 
-function InformationTable(props) {
+interface IInformationProps {
+    phoneBook: IPhoneBook[]
+}
+
+
+function InformationTable({ phoneBook }: IInformationProps) {
     return (
         <table style={style.table} className='informationTable'>
             <thead>
@@ -96,15 +118,28 @@ function InformationTable(props) {
                     <th style={style.tableCell}>Phone</th>
                 </tr>
             </thead>
+            <tbody>
+                {
+                    phoneBook.sort((a,b) => a.lastName.localeCompare(b.lastName)).map((value, index) => {
+                        return <tr key={index}><td>{value.firstName}</td><td>{value.lastName}</td><td>{value.phone}</td></tr>
+                    })
+                }
+            </tbody>
         </table>
     );
 }
 
 function Application(props) {
+    const [phoneBook, setPhoneBook] = useState<IPhoneBook[]>([]);
+
+    const saveToPhoneBook = (data: IPhoneBook) => {
+        setPhoneBook((obj) => ([...obj, data]))
+    }
+
     return (
         <section>
-            <PhoneBookForm addEntryToPhoneBook="" />
-            <InformationTable />
+            <PhoneBookForm addEntryToPhoneBook={saveToPhoneBook} />
+            <InformationTable phoneBook={phoneBook}/>
         </section>
     );
 }

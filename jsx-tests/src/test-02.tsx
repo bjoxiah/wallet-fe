@@ -6,16 +6,19 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-class Counter extends React.Component {
+class Counter extends React.Component<any, {count: number}> {
   constructor(props) {
     super(props);
+    this.state = {
+      count: 0
+    };
   }
 
   render() {
     return (
       <div id="mainArea">
-        <p>button count: <span>0</span></p>
-        <button id="mainButton">Increase</button>
+        <p>button count: <span>{this.state.count}</span></p>
+        <button id="mainButton" onClick={() => this.setState((obj) => ({...obj, count: obj.count+1}))}>Increase</button>
       </div>
     );
   }
