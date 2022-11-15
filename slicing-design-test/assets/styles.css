@@ -1,11 +1,14 @@
 :root {
     --hero-color: #23113a;
-    --header-background: #ffffff;
     --light-gray: #f2f2f3;
     --text-color: #1f1f20;
     --title-color: #595a5a;
     --body-background: #f0f4f7;
     --main-title-color: #373737;
+    --btn-color: #f96e3d;
+    --btn-color-alt: #59d8d1;
+    --white: #ffffff;
+    --link: #5bb5f9;
 }
 
 /* Black normal */
@@ -74,7 +77,7 @@ body {
 
 .container {
     margin: auto;
-    width: 1024px;
+    width: 100%;
     /* border: 2px solid red; */
     height: auto;
 }
@@ -90,12 +93,13 @@ body {
     margin-top: 62px;
     font-weight: 400;
     font-size: 70px;
-    color: var(--light-gray)
+    color: var(--light-gray);
+    padding: 16px;
 }
 
 .header {
     /* padding: 10px; */
-    background: var(--header-background);    
+    background: var(--white);    
 }
 
 .menu {
@@ -124,25 +128,222 @@ body {
     border-right: none;
 }
 
-.main {
-    margin-bottom: 100px;;
-}
 .main-title {
     margin-top: 62px;
     margin-bottom: 20px;
     font-weight: 700;
     color: var(--main-title-color);
-    font-size: 20px;
+    font-size: 30px;
+    padding: 16px;
 }
 
 .card {
-    background: var(--header-background);
-    padding: 20px;
+    background: var(--white);
+    padding: 16px;
     box-shadow: 0px 1px 1px 1px var(--light-gray);
 }
-
-.card-title {
+.card-header {
     display: flex;
+    justify-content: space-between;    
+}
+.card-title {
+    display: inline;
     justify-content: space-between;
     align-items: center;
+    color: var(--title-color);
+    font-size: 20px;
+}
+.card-reviews {
+    display: none;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px auto;
+    flex-direction: column;
+}
+.cta {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+}
+.details {
+    width: 100%;
+}
+.payment {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+    align-items: center;
+}
+
+.payment-info {
+    font-size: 20px;
+    width: 40%;
+    text-align: center;   
+    padding: 0px 30px; 
+}
+
+.approval-text {
+    line-height: 30px;
+}
+
+.cta-btn-alt {
+    outline: none;
+    background: var(--btn-color-alt);
+    padding: 5px 20px;
+    color: var(--white);
+    border: none;
+    border-radius: 30px;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.payment-card {
+    width: 60%;
+}
+
+.payment-card-image {
+    width: 100%;
+    height: 150px;
+}
+
+
+.cta-btn {
+    outline: none;
+    background: var(--btn-color);
+    width: 100%;
+    padding: 10px;
+    color: var(--light-gray);
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.details {
+    line-height: 25px;
+    font-size: 20px;
+}
+
+ul {
+    margin: 30px auto;
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 25px;
+}
+
+.link {
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--link);
+}
+
+.card-footer {
+    border-top: 2px solid var(--light-gray);
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+.mobile {
+    display: block;
+}
+
+.desktop {
+    display: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        width: 1024px;
+    }
+
+    .card-reviews {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--title-color);
+        font-size: 18px;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    .desktop {
+        display: block;
+    }
+
+    .main {
+        margin-bottom: 100px;
+    }
+
+    .card {
+        padding: 50px;
+    }
+
+    .card-title {
+        display: flex;
+    }
+
+    .card-body {
+        flex-direction: row;
+    }
+
+    .cta {
+        width: 50%;
+    }
+
+    .details {
+        width: 50%;
+        margin-left: 40px;
+    }
+
+    .payment {
+        align-items: unset;
+    }
+
+    .payment-info {
+        width: 30%;
+        padding: 0px;
+    }
+
+    .payment-card {
+        width: 70%;
+    }
+
+    .star-rating {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        margin-right: 10px;
+    }
+
+    .star {
+        width: 16px;
+        height: 16px;
+        margin: auto 2px;
+    }
+
+    .review-text {
+        padding-top: 2px;
+    }
+
+    .hero-title {
+        padding: 0px;
+    }
+
+    ul {
+        margin: 0px;
+    }
+
+    li {
+        margin-bottom: 15px;
+    }
 }
